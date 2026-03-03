@@ -14,10 +14,4 @@ router.post("/", async (req, res) => {
   res.json({ message: "Category added" });
 });
 
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  await db.query("DELETE FROM categories WHERE id = ?", [id]);
-  res.json({ message: "Category deleted" });
-});
-
 export default router;
