@@ -60,7 +60,14 @@ export default function DashboardForm(){
     setDescription("");
     setImage(null);
   }
-
+  async function deleteExpense(id: number) {
+    try {
+      await fetch(`http://localhost:3001/delete/${id}`); 
+      fetchExpenses();
+    } catch (error) {
+      console.error(error);
+    }
+  }
   async function fetchExpenses() {
     const res = await fetch("http://localhost:3001/expenses");
     const data = await res.json();
@@ -143,6 +150,7 @@ return (
               <small>{e.expense_date}</small>
               <div>{e.description}</div>
               {e.image_path && <img src={`${API_BASE_URL}${e.image_path}`}></img>}
+              <button onClick={() => deleteExpense(e.id)}>Delete</button>
             </div>
           ))}
         </aside>
