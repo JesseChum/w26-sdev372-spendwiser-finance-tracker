@@ -62,7 +62,10 @@ export default function DashboardForm(){
   }
   async function deleteExpense(id: number) {
     try {
-      await fetch(`http://localhost:3001/delete/${id}`); 
+      await fetch(`http://localhost:3001/delete/${id}`, {
+        method: "DELETE",
+      })
+      console.log("Deleted from database!")
       fetchExpenses();
     } catch (error) {
       console.error(error);
