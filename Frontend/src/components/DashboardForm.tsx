@@ -62,7 +62,10 @@ export default function DashboardForm(){
   }
   async function deleteExpense(id: number) {
     try {
-      await fetch(`http://localhost:3001/delete/${id}`); 
+      await fetch(`http://localhost:3001/delete/${id}`, {
+        method: "DELETE",
+      })
+      console.log("Deleted from database!")
       fetchExpenses();
     } catch (error) {
       console.error(error);
@@ -99,8 +102,8 @@ return (
       {/* TOP ROW */}
       <div className="top-row">
         <div className="field">
-          <label>Category</label>
-          <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <label htmlFor="category">Category</label>
+          <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
             <option value="">Select</option>
             {Categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
@@ -112,8 +115,9 @@ return (
        
 
         <div className="field">
-          <label>$ Spent</label>
+          <label htmlFor="amount">$ Spent</label>
           <input
+            id="amount"
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
@@ -121,16 +125,18 @@ return (
         </div>
 
         <div className="field">
-          <label>Location</label>
+          <label htmlFor="location">Location</label>
           <input
+            id="location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
         </div>
 
         <div className="field">
-          <label>Date</label>
+          <label htmlFor="date">Date</label>
           <input
+            id="date"
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
@@ -172,6 +178,7 @@ return (
           </div>
 
           <textarea
+            id="description"
             placeholder="What's the item for today?"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
