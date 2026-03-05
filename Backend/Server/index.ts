@@ -32,3 +32,5 @@ app.use("/delete", deleteRouter);
 app.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`);
 });
+
+export default app;
