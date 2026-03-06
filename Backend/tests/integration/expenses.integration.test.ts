@@ -48,4 +48,22 @@ describe.skipIf(!isTestDb)("Expenses API integration", () => {
     expect(allExpenses.body[0]).toHaveProperty("id");
     expect(allExpenses.body[0]).toHaveProperty("created_at");
   });
+
+  test("DELETE removes an expense", async () => {
+    const expense = {
+      hobby: "Hiking",
+      description: "Trail fee",
+      location: "State Park",
+      amount: "25.55",
+      expense_date: "2025-03-01",
+    };
+
+    const responseObj = await request(app).post("/expenses").send(expense).set("Content-Type", "application/json");
+    expect(responseObj.status).toBe(201);
+
+    const allExpenses = await request(app).get("/expenses")
+    const deleted = await request(app).delete(`/delete/${allExpenses.body[0].id}`)
+
+    expect(deleted.body).toMatchObject({ message: "Expense deleted" })
+  })
 });
