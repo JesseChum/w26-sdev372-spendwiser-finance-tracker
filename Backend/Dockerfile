@@ -2,6 +2,7 @@ FROM node:18-alpine
 
 WORKDIR /app
 
+RUN apk add --no-cache curl
 # Copy package files
 COPY package*.json ./
 RUN npm install
