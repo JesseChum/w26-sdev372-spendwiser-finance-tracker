@@ -49,13 +49,26 @@ describe.skipIf(!isTestDb)("Expenses API integration", () => {
     expect(allExpenses.body[0]).toHaveProperty("created_at");
   });
 
-  test("DELETE removes an expense", async () => {
+  test("POST gets rejected with no hobby", async () => {
     const expense = {
-      hobby: "Hiking",
       description: "Trail fee",
       location: "State Park",
       amount: "25.55",
-      expense_date: "2025-03-01",
+      expense_date: "2025-03-01"
+    };
+
+    const responseObj = await request(app).post("/expenses").send(expense).set("Content-Type", "application/json");
+    expect(responseObj.status).toBe(400)
+    expect(responseObj.body).toMatchObject({error: "Missing required fields"})
+  })
+
+  test("Removing an Expense", async () => {
+    const expense = {
+    hobby: "Hiking",
+    description: "Trail fee",
+    location: "State Park",
+    amount: "25.55",
+    expense_date: "2025-03-01",
     };
 
     const responseObj = await request(app).post("/expenses").send(expense).set("Content-Type", "application/json");

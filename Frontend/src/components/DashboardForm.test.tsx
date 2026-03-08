@@ -2,7 +2,6 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
 import DashboardForm from "./DashboardForm";
-import userEvent from "@testing-library/user-event";
 
 describe("Spendwiser SPA root App", () => {
     beforeEach(() => {

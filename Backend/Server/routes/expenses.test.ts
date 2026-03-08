@@ -27,7 +27,7 @@ describe("Expenses API data", async () => {
     ]);
   });
 
-  test("Expenses should accept new items and return stored data", async () => {
+  test("Expenses should accept new items", async () => {
     vi.mocked(pool.query).mockResolvedValue([
       [
         { id: 1, hobby: "Eating", description: "Eating at my house", location: "House", amount: 10, expense_date: "2022-01-01" },
