@@ -9,6 +9,14 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./Backend/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+      start_period: 5s
+    networks:
+      - app-network
 
   test-db:
     image: mysql:8
@@ -17,16 +25,21 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: testpassword
       MYSQL_DATABASE: spendwiser_test
+    volumes:
+      - ./Backend/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$${MYSQL_ROOT_PASSWORD}"]
       interval: 2s
       timeout: 10s
       retries: 10
       start_period: 5s
+    networks:
+      - app-network
 
-  backend-test-runner:
-    build: ./Backend
-    container_name: spendwiser-backend-test-runner
+  integration-tests:
+    build: ./
+    container_name: spendwiser-integration-tests
+    ipc: host
     environment:
       DB_HOST: test-db
       DB_USER: root
@@ -36,14 +49,9 @@ services:
     depends_on:
       test-db:
         condition: service_healthy
-    command: npm run test:ci
     restart: "no"
-
-  frontend-test-runner:
-    build: ./Frontend
-    container_name: spendwiser-frontend-test-runner
-    command: npm run test:ci
-    restart: "no"
+    networks:
+      - app-network
 
   backend:
     build: ./Backend
@@ -58,7 +66,16 @@ services:
       DB_NAME: spendwiser
       DB_PORT: 3306
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3001/api/health || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - app-network
 
   frontend:
     build: ./Frontend
@@ -67,7 +84,20 @@ services:
     ports:
       - "5173:5173"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5173/ || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
   db_data:

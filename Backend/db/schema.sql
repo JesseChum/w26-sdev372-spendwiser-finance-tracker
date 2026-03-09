@@ -1,5 +1,3 @@
-USE spendwiser;
-
 CREATE TABLE IF NOT EXISTS expenses (
   id INT AUTO_INCREMENT PRIMARY KEY,
   hobby VARCHAR(50) NOT NULL,
