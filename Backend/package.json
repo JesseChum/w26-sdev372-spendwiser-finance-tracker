@@ -4,20 +4,28 @@
   "scripts": {
     "dev": "ts-node Server/index.ts",
     "db:schema": "ts-node scripts/run-schema.ts",
-    "db:image": "ts-node scripts/add_image_column.ts"
+    "db:image": "ts-node scripts/add_image_column.ts",
+    "test": "vitest",
+    "test:ci": "vitest run",
+    "test:integration": "cross-env DB_NAME=spendwiser_test vitest run tests/integration"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "jest": "^30.2.0",
     "multer": "^2.0.2",
-    "mysql2": "^3.16.0"
+    "mysql2": "^3.16.0",
+    "supertest": "^7.2.2",
+    "vitest": "^4.0.18"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/multer": "^2.0.0",
     "@types/node": "^25.0.7",
+    "@types/supertest": "^7.2.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }

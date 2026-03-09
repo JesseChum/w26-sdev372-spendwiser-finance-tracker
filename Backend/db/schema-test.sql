@@ -1,3 +1,7 @@
+-- Test DB for integration tests
+CREATE DATABASE IF NOT EXISTS spendwiser_test;
+USE spendwiser_test;
+
 CREATE TABLE IF NOT EXISTS expenses (
   id INT AUTO_INCREMENT PRIMARY KEY,
   hobby VARCHAR(50) NOT NULL,
