@@ -47,7 +47,7 @@ export default function DashboardForm(){
         formData.append("expense_date", date);
         if (image) formData.append("image", image[0]);
 
-        await fetch("http://localhost:3001/expenses", {
+        await fetch(`${API_BASE_URL}/expenses`, {
             method: "POST",
             body: formData,
         });
@@ -62,7 +62,7 @@ export default function DashboardForm(){
   }
   async function deleteExpense(id: number) {
     try {
-      await fetch(`http://localhost:3001/delete/${id}`, {
+      await fetch(`${API_BASE_URL}/delete/${id}`, {
         method: "DELETE",
       })
       console.log("Deleted from database!")
@@ -72,7 +72,7 @@ export default function DashboardForm(){
     }
   }
   async function fetchExpenses() {
-    const res = await fetch("http://localhost:3001/expenses");
+    const res = await fetch(`${API_BASE_URL}/expenses`);
     const data = await res.json();
     setExpenses(data);
   }
