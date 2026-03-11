@@ -32,6 +32,13 @@
 ## Wireframe
 ![WireFrame-Picture](WireFrame.png)
 
+# Docker Deployment
+- Have docker installed & running
+- Run `docker compose up -d --build` at the root of the project
+- Docker will take over and build the two dockerfiles located in the frontend & backend
+- Frontend Port: `localhost:5173`
+- Backend Port: `localhost:3001` - `/api/health` - `/expenses`
+
 # MVP for Sprint 2 Deliverable (Xavier & Jacob)
 
 - Add ability to upload images
@@ -72,3 +79,22 @@
     - Format times to be easier to read when they are added to the finace history
 - **Look into Finance Chart**
     - Look into creating a pie chart that counts the spending for a product
+
+# Testing Requirements for Spendwiser
+- FE tests: Verify users are able to view and interact with the SPA
+    - Use **vitest** for testing
+    - Ensure SPA renders to the user
+    - Verify users are able to enter into the input boxes
+- BE tests: Verify the /expenses route correctly returns stored expenses and accepts new expense submissions
+    - Use **Jest** or **supertest** for testing
+    - Ensure **/expenses** correctly sends expense data
+    - Ensure **/expenses** returns stored expense data
+- Ensure **/expenses** accepts new expense data
+    - Integration tests: Verify that the /expenses API correctly interacts with the database.
+    - Use Jest or supertest for testing
+    - Verify the **/expenses** API correctly stores data
+    - Verify the **/expenses** API correclty retrieves data
+- E2E tests: Verify full functionality of the SPA
+    - Use **playwright** or **cypress** for testing
+    - Verify users can submit **data/expenses** through the UI
+    - Verify data appears on UI
