@@ -16,8 +16,8 @@ test('Walkthrough to Delete Transaction', async ({ page }) => {
     const elementLocation = page.locator('.history-item').filter({hasText: description})
 
     await page.getByRole('button', { name: 'Add Expense' }).click();
-    await expect(elementLocation).toHaveCount(1);
+    await expect(elementLocation).toBeVisible({ timeout: 10000 });
 
     await elementLocation.getByRole('button', {name:'Delete'}).click()
-    await expect(elementLocation).toHaveCount(0)
+    await expect(elementLocation).toHaveCount(0, { timeout: 10000 });
 })

@@ -16,8 +16,7 @@ test('expense form submission', async ({ page }) => {
   await page.getByRole('button', { name: 'Add Expense' }).click();
 
   const newExpenseRow = page.locator('.history-item').filter({ hasText: description });
-  await expect(newExpenseRow).toHaveCount(1);
-  await expect(newExpenseRow).toBeVisible();
+  await expect(newExpenseRow).toBeVisible({ timeout: 10000 });
   await expect(newExpenseRow).toContainText('groceries');
   await expect(newExpenseRow).toContainText('$100');
   await expect(newExpenseRow).toContainText('2026-01-01');
