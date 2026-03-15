@@ -29,6 +29,8 @@ type Expense = {
   created_at: string;
 };
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 export default function DashboardForm(){
     const [category, setCategory] =useState("");
     const [amount, setAmount] = useState("");
@@ -87,7 +89,7 @@ export default function DashboardForm(){
       }, []),
   })
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 
 return (
     <div className="app-container">

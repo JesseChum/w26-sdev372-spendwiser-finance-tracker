@@ -98,3 +98,15 @@
     - Use **playwright** or **cypress** for testing
     - Verify users can submit **data/expenses** through the UI
     - Verify data appears on UI
+
+# MVP for Sprint 5 Deliverable (Tim & Jesse)
+- **Time Format**: The time format when entering data is hard to read and distugish an actual time
+    - Trim extra uneeded numbers and letters from format
+    - Organize under data section more properly
+- **Data Graph/Chart**: Find and use a chart to display money savings and money spent on the main dashboard/SPA
+    - Learning Spike: Find a graphing/charting library to use
+    - Display a small graph/chart of savings for users to view
+- **CSS Styling**: Verify styles are good and fully ironed out
+    - (maybe) move entire entry box and dashboard to be in the center of the screen when rendered
+    - Add small shadow details
+    - Add small effect details
