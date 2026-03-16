@@ -1,6 +1,7 @@
 import './App.css'
 import {useEffect} from "react";
 import DashboardForm from './components/DashboardForm';
+import SavingsChart from "./components/SavingsChart";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/';
 function App() {
