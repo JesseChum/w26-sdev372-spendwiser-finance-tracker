@@ -170,10 +170,12 @@ return (
           <div className="image-drop">
             <div {...getRootProps()} className="dropzone">
                 <input {...getInputProps()} />
-            {isDragActive ? (
+            {!image && (
+              isDragActive ? (
                 <p>Drop the files here ...</p>
             ) : (
                 <p>Drag and drop some files here, or click to select files</p>
+              )
             )}
             </div>
             {image && image.length > 0 && (
