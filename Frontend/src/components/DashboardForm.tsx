@@ -155,7 +155,7 @@ return (
             <div key={e.id} className="history-item">
               <div>{e.hobby}</div>
               <div>${e.amount}</div>
-              <small>{e.expense_date}</small>
+              <small>{new Date(e.expense_date).toLocaleDateString()}</small>
               <div>{e.description}</div>
               {e.image_path && <img src={`${API_BASE_URL}${e.image_path}`}></img>}
               <button onClick={() => deleteExpense(e.id)}>Delete</button>
