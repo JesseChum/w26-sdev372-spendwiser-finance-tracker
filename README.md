@@ -110,3 +110,6 @@
     - (maybe) move entire entry box and dashboard to be in the center of the screen when rendered
     - Add small shadow details
     - Add small effect details
+- **Style Delete Button**: Our partners recently added a new feature for deleting inputs out of the DB
+    - Style the button to look more like the rest of the SPA
+    - Position could be a little better as well

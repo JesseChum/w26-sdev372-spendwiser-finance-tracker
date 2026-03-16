@@ -157,7 +157,7 @@ return (
               <div>${e.amount}</div>
               <small>{new Date(e.expense_date).toLocaleDateString()}</small>
               <div>{e.description}</div>
-              {e.image_path && <img src={`${API_BASE_URL}${e.image_path}`}></img>}
+              {e.image_path && <img src={`${API_BASE_URL}/${e.image_path}`}></img>}
               <button onClick={() => deleteExpense(e.id)}>Delete</button>
             </div>
           ))}
