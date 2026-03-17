@@ -20,13 +20,13 @@ jobs:
           tags: tag:deploy
 
       # 👇 ADD THIS RIGHT HERE
-      - name: Debug DEPLOY_HOST
+      - name: Debug SERVER_HOST
         run: |
-          if [ -z "${{ secrets.DEPLOY_HOST }}" ]; then
-            echo "DEPLOY_HOST is EMPTY"
+          if [ -z "${{ secrets.SERVER_HOST }}" ]; then
+            echo "SERVER_HOST is EMPTY"
             exit 1
           else
-            echo "DEPLOY_HOST is set"
+            echo "SERVER_HOST is set"
           fi
 
       - name: Deploy via SSH
