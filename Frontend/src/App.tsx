@@ -1,7 +1,6 @@
 import './App.css'
 import { useEffect } from "react";
 import DashboardForm from './components/DashboardForm';
-import SavingsChart from "./components/SavingsChart";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/';
 
@@ -18,22 +17,7 @@ function App() {
       });
   }, []);
 
-  // TEMPORARY test data so the chart renders
-  const demoExpenses = [
-    { amount: 15 },
-    { amount: 150 },
-    { amount: 1500 }
-  ];
-
-  return (
-    <>
-      <DashboardForm />
-
-      <div style={{width: "300px", margin: "40px auto"}}>
-        <SavingsChart expenses={demoExpenses} />
-      </div>
-    </>
-  )
+  return <DashboardForm />;
 }
 
 export default App;
