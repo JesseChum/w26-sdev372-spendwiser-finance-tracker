@@ -19,12 +19,22 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:deploy
 
+      # 👇 ADD THIS RIGHT HERE
+      - name: Debug DEPLOY_HOST
+        run: |
+          if [ -z "${{ secrets.DEPLOY_HOST }}" ]; then
+            echo "DEPLOY_HOST is EMPTY"
+            exit 1
+          else
+            echo "DEPLOY_HOST is set"
+          fi
+
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
           script: |
             cd ${{ secrets.DEPLOY_PATH }}
             git pull origin main
