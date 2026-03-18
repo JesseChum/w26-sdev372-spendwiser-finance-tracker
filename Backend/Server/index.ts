@@ -9,7 +9,7 @@ import deleteRouter from "./routes/delete";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = parseInt(process.env.PORT || "3001", 10);
 
 app.use(cors());
 app.use(express.json());
@@ -27,8 +27,8 @@ app.use("/expenses", expensesRouter);
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 app.use("/categories", categories)
 app.use("/delete", deleteRouter);
-app.listen(PORT, () => {
-  console.log(`Backend running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0',() => {
+  console.log(`Backend running on http://0.0.0.0:${PORT}`);
 });
 
 export default app;
