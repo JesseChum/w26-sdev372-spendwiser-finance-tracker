@@ -223,7 +223,7 @@ onChange={(e) => setDescription(e.target.value)}
 
 <h3>Finance goals chart</h3>
 
-<div style={{ width: "100%", height: "250px" }}>
+<div className="chart-container">
 <SavingsChart expenses={expenses} />
 </div>
 
