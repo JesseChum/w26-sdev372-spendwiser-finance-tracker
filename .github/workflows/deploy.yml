@@ -19,7 +19,6 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:deploy
 
-      # 👇 ADD THIS RIGHT HERE
       - name: Debug SERVER_HOST
         run: |
           if [ -z "${{ secrets.SERVER_HOST }}" ]; then
