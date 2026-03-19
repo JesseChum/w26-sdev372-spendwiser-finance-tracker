@@ -40,6 +40,12 @@ export default function DashboardForm(){
     const [description, setDescription] = useState("");
     const [expenses, setExpenses] = useState<Expense[]>([]);
     const [image, setImage] = useState<File[] | null>(null);
+    const [goal, setGoal] = useState(5000);
+
+    const totalSpent = expenses.reduce(
+        (sum, item) => sum + Number(item.amount),
+        0
+    );
 
     async function submitExpense() {
         if (!category || !amount || !date) return;
@@ -224,8 +230,18 @@ onChange={(e) => setDescription(e.target.value)}
 <h3>Finance goals chart</h3>
 
 <div className="chart-container">
-<SavingsChart expenses={expenses} />
+<SavingsChart totalSpent={totalSpent} goal={goal} />
 </div>
+<p className="total-spent"> Total Spendings: {totalSpent} </p>
+<div className="field">
+<input 
+    type="number"
+    placeholder="Enter savings goal"
+    value={goal}
+    onChange={(e) => setGoal(Number(e.target.value))}
+/>
+</div> 
+
 
 </aside>
 

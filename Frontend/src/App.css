@@ -183,6 +183,14 @@ html, body, #root {
   height: 250px;
 }
 
+.total-spent {
+  margin-top: 10px;
+  text-align: center;
+
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
 
 /*Footer */
 .footer {

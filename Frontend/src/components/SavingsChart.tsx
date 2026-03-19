@@ -1,26 +1,18 @@
-import { PieChart, Pie, Cell } from "recharts";
-
-type Expense = {
-  amount: number;
-};
+import { PieChart, Pie, Cell, Label } from "recharts";
 
 type Props = {
-  expenses: Expense[];
+  totalSpent: number;
+  goal: number;
 };
 
 const COLORS = ["#1f9d8a", "#e5e7eb"];
 
-export default function SavingsChart({ expenses }: Props) {
+export default function SavingsChart({ totalSpent, goal }: Props) {
 
-  const goal = 5000;
-
-  const totalSpent = expenses.reduce(
-    (sum, item) => sum + Number(item.amount),
-    0
-  );
+  const percent = goal > 0 ? (totalSpent / goal) * 100 : 0
 
   const data = [
-    { name: "Spent", value: totalSpent },
+    { name: "Spent", value: Math.min(totalSpent, goal) },
     { name: "Remaining", value: Math.max(goal - totalSpent, 0) }
   ];
 
@@ -35,6 +27,11 @@ export default function SavingsChart({ expenses }: Props) {
         {data.map((entry, index) => (
           <Cell key={index} fill={COLORS[index]} />
         ))}
+        
+        <Label 
+          value={`${percent.toFixed(0)}%`}
+          position="center"
+        />
       </Pie>
     </PieChart>
   );
