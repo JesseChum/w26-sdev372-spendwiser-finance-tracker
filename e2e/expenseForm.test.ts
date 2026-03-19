@@ -24,6 +24,6 @@ test('expense form submission', async ({ page }) => {
   await expect(newExpenseRow).toBeVisible({ timeout: 10000 });
   await expect(newExpenseRow).toContainText('groceries');
   await expect(newExpenseRow).toContainText('$100');
-  await expect(newExpenseRow).toContainText('1/1/20265');
+  await expect(newExpenseRow).toContainText('1/1/2026');
 });
 
