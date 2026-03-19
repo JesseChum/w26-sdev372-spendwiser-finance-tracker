@@ -7,6 +7,7 @@ test('expense form submission', async ({ page }) => {
   const amount = '100';
   const date = '2026-01-01';
   const description = 'E2E expense' + Date.now();
+  const formattedDate = new Date(date).toLocaleDateString();
 
   await page.getByLabel('Category').selectOption({ label: category });
   await page.getByLabel('$ Spent').fill(amount);
@@ -24,6 +25,6 @@ test('expense form submission', async ({ page }) => {
   await expect(newExpenseRow).toBeVisible({ timeout: 10000 });
   await expect(newExpenseRow).toContainText('groceries');
   await expect(newExpenseRow).toContainText('$100');
-  await expect(newExpenseRow).toContainText('1/1/2026');
+  await expect(newExpenseRow).toContainText(formattedDate);
 });
 
