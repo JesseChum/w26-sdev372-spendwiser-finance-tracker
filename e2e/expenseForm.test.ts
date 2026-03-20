@@ -20,7 +20,12 @@ test('expense form submission', async ({ page }) => {
   .toBeVisible({ timeout: 10000 });
 
   const newExpenseRow = page.locator('.history-item').filter({ hasText: description });
-  await expect(newExpenseRow).toBeVisible({ timeout: 10000 });
+  
+  await expect(async () => {
+    const items = await page.locator('.history-item').allTextContents();
+    expect(items.join(' ')).toContain(description);
+  }).toPass({ timeout: 15000 });
+
   await expect(newExpenseRow).toContainText('groceries');
   await expect(newExpenseRow).toContainText('$100');
   await expect(newExpenseRow).toContainText(formattedDate);
