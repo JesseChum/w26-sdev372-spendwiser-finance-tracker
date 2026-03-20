@@ -14,12 +14,10 @@ test('expense form submission', async ({ page }) => {
   await page.getByLabel('Date').fill(date);
   await page.getByPlaceholder("What's the item for today?").fill(description);
 
-  await Promise.all([
-    page.waitForResponse(res =>
-      res.url().includes('/expenses') && res.request().method() === 'POST'
-    ),
-    page.getByRole('button', { name: 'Add Expense' }).click()
-  ]);
+  await page.getByRole('button', { name: 'Add Expense' }).click();
+
+  await expect(page.locator('.history-item').filter({ hasText: description }))
+  .toBeVisible({ timeout: 10000 });
 
   const newExpenseRow = page.locator('.history-item').filter({ hasText: description });
   await expect(newExpenseRow).toBeVisible({ timeout: 10000 });
